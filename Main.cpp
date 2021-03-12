@@ -9,6 +9,7 @@ int main()
     List list;
     list.insert(55);
     list.insert(42);
+    list.deleteNode(55);
     list.insert(64);
     list.printList();
     return 0;

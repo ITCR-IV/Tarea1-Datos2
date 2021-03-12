@@ -5,7 +5,8 @@ class Node{
 
     public:
         Node(int val){
-            this->value = val;
+            value = val;
+            next = nullptr;
         }
 
         int getValue(){
