@@ -1,27 +1,50 @@
-class Node{
-    private:
-        int value;
-        Node* next;
+#include "Node.h"
+#include "Collector.h"
+#include <cstdio>
+#include <cstdlib>
 
-    public:
-        Node(int val){
-            value = val;
-            next = nullptr;
-        }
+Node::Node(int val)
+{
+    value = val;
+    next = nullptr;
+}
 
-        int getValue(){
-            return value;
-        }
+void *Node::operator new(size_t size)
+{
+    void *ptr;
+    if (Collector::isEmpty())
+    {
+        ptr = malloc(size);
+    }
+    else
+    {
+        ptr = Collector::recycleNode();
+    }
+    return ptr;
+}
 
-        void setValue(int newVal){
-            value = newVal;
-        }
+void Node::operator delete(void *ptr)
+{
+    Node *nodePtr = static_cast<Node *>(ptr);
+    Collector::insert(nodePtr);
+}
 
-        Node* getNext(){
-            return next;
-        }
+int Node::getValue()
+{
+    return value;
+}
 
-        void setNext(Node* newNext){
-            next = newNext;
-        }
-};
+void Node::setValue(int newVal)
+{
+    value = newVal;
+}
+
+Node *Node::getNext()
+{
+    return next;
+}
+
+void Node::setNext(Node *newNext)
+{
+    next = newNext;
+}

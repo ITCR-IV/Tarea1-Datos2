@@ -1,9 +1,13 @@
+#include "Node.h"
+#include <cstdio>
+#include <cstdlib>
+
 class List
 {
 private:
     Node *head = nullptr;
 
-    Node *setHead(Node* newHead)
+    void setHead(Node *newHead)
     {
         head = newHead;
     }
@@ -51,16 +55,17 @@ public:
             current = current->getNext();
         }
         //loop ending means nothing was found
-        printf("Wrong call to deleteNode with value %d, value not in the list\n",val);
+        printf("Wrong call to deleteNode with value %d, value not in the list\n", val);
         return;
     }
 
     void printList()
     {
+        printf("List:\n");
         Node *current = head;
         while (current != nullptr)
         {
-            printf("Node: %d\n", current->getValue());
+            printf("Address: %p     Node: %d\n", current ,current->getValue());
             current = current->getNext();
         }
     }
